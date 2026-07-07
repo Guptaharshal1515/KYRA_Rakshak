@@ -87,8 +87,8 @@ export function ChatBot() {
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[min(600px,80vh)] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-elegant">
-          <div className="flex items-center gap-2 border-b border-border bg-hero-gradient px-4 py-3 text-white">
+        <div className="fixed bottom-24 right-6 z-50 flex h-[min(600px,80vh)] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-primary/30 bg-card shadow-elegant shadow-black/10">
+          <div className="flex items-center gap-2 border-b border-primary/20 bg-trust-gradient px-4 py-3 text-white">
             <div className="grid h-8 w-8 place-items-center rounded-full bg-white/15">
               <Sparkles className="h-4 w-4" />
             </div>
