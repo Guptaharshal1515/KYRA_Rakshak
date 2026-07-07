@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { emitActivityEvent } from "@/lib/activity.functions";
 
 export type ActivityEvent = {
   id: string;
@@ -32,6 +34,7 @@ function randHash() {
 export function useActivityFeed(limit = 8) {
   const [events, setEvents] = useState<ActivityEvent[]>([]);
   const [loading, setLoading] = useState(true);
+  const emitFn = useServerFn(emitActivityEvent);
 
   useEffect(() => {
     let mounted = true;
@@ -67,11 +70,13 @@ export function useActivityFeed(limit = 8) {
 
   const emitMock = useCallback(async () => {
     const pick = MOCK_EVENTS[Math.floor(Math.random() * MOCK_EVENTS.length)];
-    await supabase.from("activity_events").insert({
-      ...pick,
-      tx_hash: pick.tx_hash ? randHash() : null,
+    await emitFn({
+      data: {
+        ...pick,
+        tx_hash: pick.tx_hash ? randHash() : null,
+      },
     });
-  }, []);
+  }, [emitFn]);
 
   return { events, loading, emitMock };
 }
