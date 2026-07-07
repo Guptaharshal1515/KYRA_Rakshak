@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WalletRouteImport } from './routes/wallet'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoanCenterRouteImport } from './routes/loan-center'
 import { Route as KycVaultRouteImport } from './routes/kyc-vault'
@@ -22,6 +23,11 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 const WalletRoute = WalletRouteImport.update({
   id: '/wallet',
   path: '/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/kyc-vault': typeof KycVaultRoute
   '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wallet': typeof WalletRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/kyc-vault': typeof KycVaultRoute
   '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wallet': typeof WalletRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/kyc-vault': typeof KycVaultRoute
   '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wallet': typeof WalletRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/kyc-vault'
     | '/loan-center'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/wallet'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/kyc-vault'
     | '/loan-center'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/wallet'
     | '/api/chat'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/kyc-vault'
     | '/loan-center'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/wallet'
     | '/api/chat'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   KycVaultRoute: typeof KycVaultRoute
   LoanCenterRoute: typeof LoanCenterRoute
   OnboardingRoute: typeof OnboardingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WalletRoute: typeof WalletRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/wallet'
       fullPath: '/wallet'
       preLoaderRoute: typeof WalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -223,9 +243,20 @@ const rootRouteChildren: RootRouteChildren = {
   KycVaultRoute: KycVaultRoute,
   LoanCenterRoute: LoanCenterRoute,
   OnboardingRoute: OnboardingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   WalletRoute: WalletRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
