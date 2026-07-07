@@ -12,11 +12,11 @@ export const Route = createFileRoute("/")({
         content:
           "KYRA empowers you to own your digital identity, verify once, share selectively, and manage your financial records with complete privacy and transparency.",
       },
-      { property: "og:title", content: "KYRA — Decentralized Trust Infrastructure" },
+      { property: "og:title", content: "KYRA — One Identity. Every Record. Infinite Trust." },
       {
         property: "og:description",
         content:
-          "One Identity. Every Record. Infinite Trust. KYRA — decentralized banking trust infrastructure.",
+          "KYRA empowers you to own your digital identity, verify once, share selectively, and manage your financial records with complete privacy and transparency.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

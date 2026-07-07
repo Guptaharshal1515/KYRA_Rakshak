@@ -80,20 +80,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "KYRA — Know Your Records, Always" },
+      { title: "KYRA — One Identity. Every Record. Infinite Trust." },
       {
         name: "description",
         content:
-          "KYRA is a decentralized banking trust infrastructure. One identity, infinite trust — powered by Hyperledger Indy, Aries, AnonCreds and Chainlink CCIP.",
+          "KYRA empowers you to own your digital identity, verify once, share selectively, and manage your financial records with complete privacy and transparency.",
       },
       { name: "author", content: "KYRA" },
-      { property: "og:title", content: "KYRA — Know Your Records, Always" },
+      { property: "og:title", content: "KYRA — One Identity. Every Record. Infinite Trust." },
       {
         property: "og:description",
-        content: "Decentralized banking trust infrastructure. One identity, infinite trust.",
+        content: "KYRA empowers you to own your digital identity, verify once, share selectively, and manage your financial records with complete privacy and transparency.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "KYRA — One Identity. Every Record. Infinite Trust." },
+      { name: "twitter:description", content: "KYRA empowers you to own your digital identity, verify once, share selectively, and manage your financial records with complete privacy and transparency." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/99b172e9-d458-4c21-8cd1-b2fd718c7b18/id-preview-ae75efdc--70a17c1f-2af1-4793-a652-c649c32c2fb0.lovable.app-1783452912460.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/99b172e9-d458-4c21-8cd1-b2fd718c7b18/id-preview-ae75efdc--70a17c1f-2af1-4793-a652-c649c32c2fb0.lovable.app-1783452912460.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
