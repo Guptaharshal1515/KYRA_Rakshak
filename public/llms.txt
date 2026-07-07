@@ -1,0 +1,17 @@
+# KYRA
+
+> Decentralized banking trust infrastructure. One identity, infinite trust.
+
+KYRA is a prototype web platform demonstrating decentralized identity for
+modern banking — powered by Hyperledger Indy, Aries, AnonCreds and
+Chainlink CCIP.
+
+## Pages
+- [Home](/): Landing page with product overview
+- [Dashboard](/dashboard): Identity, credentials and account overview
+- [Onboarding](/onboarding): Create a decentralized identity and issue credentials
+- [KYC Vault](/kyc-vault): Manage verifiable credentials with selective disclosure
+- [Loan Center](/loan-center): Loan applications with multi-level approval pipeline
+- [Web3 Wallet](/wallet): The flagship wallet — credentials, loans, activity, DID signing
+- [Approvals & Tasks](/approvals): Bank staff view for reviewing and signing requests
+- [Audit & Reports](/audit): Immutable, real-time event feed
