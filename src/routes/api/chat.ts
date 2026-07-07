@@ -47,7 +47,7 @@ export const Route = createFileRoute("/api/chat")({
     handlers: {
       POST: async ({ request }) => {
         const key = process.env.LOVABLE_API_KEY;
-        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+        if (!key) return new Response("Missing YOUR_API_KEY", { status: 500 });
 
         let body: { messages?: Array<{ role: string; content: string }> };
         try {
