@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "sonner";
 import { ChatBot } from "@/components/chatbot";
+import { Analytics } from "@vercel/analytics/react";
 
 function NotFoundComponent() {
   return (
