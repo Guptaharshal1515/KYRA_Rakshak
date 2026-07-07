@@ -65,7 +65,7 @@ export const Route = createFileRoute("/api/chat")({
             "Lovable-API-Key": key,
           },
           body: JSON.stringify({
-            model: "openai/gpt-5.5",
+            model: "google/gemini-2.5-flash",
             stream: true,
             messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
           }),
