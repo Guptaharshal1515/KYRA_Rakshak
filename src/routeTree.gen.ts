@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as LoanCenterRouteImport } from './routes/loan-center'
+import { Route as KycVaultRouteImport } from './routes/kyc-vault'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AuditRouteImport } from './routes/audit'
+import { Route as ApprovalsRouteImport } from './routes/approvals'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
@@ -19,9 +23,29 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoanCenterRoute = LoanCenterRouteImport.update({
+  id: '/loan-center',
+  path: '/loan-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KycVaultRoute = KycVaultRouteImport.update({
+  id: '/kyc-vault',
+  path: '/kyc-vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApprovalsRoute = ApprovalsRouteImport.update({
+  id: '/approvals',
+  path: '/approvals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,34 +61,75 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/approvals': typeof ApprovalsRoute
+  '/audit': typeof AuditRoute
   '/dashboard': typeof DashboardRoute
+  '/kyc-vault': typeof KycVaultRoute
+  '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/approvals': typeof ApprovalsRoute
+  '/audit': typeof AuditRoute
   '/dashboard': typeof DashboardRoute
+  '/kyc-vault': typeof KycVaultRoute
+  '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/approvals': typeof ApprovalsRoute
+  '/audit': typeof AuditRoute
   '/dashboard': typeof DashboardRoute
+  '/kyc-vault': typeof KycVaultRoute
+  '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/onboarding' | '/api/chat'
+  fullPaths:
+    | '/'
+    | '/approvals'
+    | '/audit'
+    | '/dashboard'
+    | '/kyc-vault'
+    | '/loan-center'
+    | '/onboarding'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/onboarding' | '/api/chat'
-  id: '__root__' | '/' | '/dashboard' | '/onboarding' | '/api/chat'
+  to:
+    | '/'
+    | '/approvals'
+    | '/audit'
+    | '/dashboard'
+    | '/kyc-vault'
+    | '/loan-center'
+    | '/onboarding'
+    | '/api/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/approvals'
+    | '/audit'
+    | '/dashboard'
+    | '/kyc-vault'
+    | '/loan-center'
+    | '/onboarding'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApprovalsRoute: typeof ApprovalsRoute
+  AuditRoute: typeof AuditRoute
   DashboardRoute: typeof DashboardRoute
+  KycVaultRoute: typeof KycVaultRoute
+  LoanCenterRoute: typeof LoanCenterRoute
   OnboardingRoute: typeof OnboardingRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -78,11 +143,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/loan-center': {
+      id: '/loan-center'
+      path: '/loan-center'
+      fullPath: '/loan-center'
+      preLoaderRoute: typeof LoanCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kyc-vault': {
+      id: '/kyc-vault'
+      path: '/kyc-vault'
+      fullPath: '/kyc-vault'
+      preLoaderRoute: typeof KycVaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approvals': {
+      id: '/approvals'
+      path: '/approvals'
+      fullPath: '/approvals'
+      preLoaderRoute: typeof ApprovalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -104,7 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApprovalsRoute: ApprovalsRoute,
+  AuditRoute: AuditRoute,
   DashboardRoute: DashboardRoute,
+  KycVaultRoute: KycVaultRoute,
+  LoanCenterRoute: LoanCenterRoute,
   OnboardingRoute: OnboardingRoute,
   ApiChatRoute: ApiChatRoute,
 }
