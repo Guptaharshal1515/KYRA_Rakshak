@@ -66,6 +66,17 @@ function StatCard({
 }
 
 function Dashboard() {
+  const { events, emitMock } = useActivityFeed(6);
+
+  // Auto-emit a mock blockchain event every 12s while dashboard is open,
+  // so the real-time feed feels alive across all open sessions.
+  useEffect(() => {
+    const t = setInterval(() => {
+      emitMock();
+    }, 12000);
+    return () => clearInterval(t);
+  }, [emitMock]);
+
   return (
     <AppLayout>
       <div className="mx-auto max-w-7xl space-y-6">
