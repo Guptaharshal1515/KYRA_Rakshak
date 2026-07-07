@@ -47,10 +47,10 @@ const benefits = [
 ];
 
 const techBadges = [
-  { name: "Hyperledger Indy", sub: "Decentralized Identity" },
-  { name: "Hyperledger Aries", sub: "Credential Exchange" },
-  { name: "AnonCreds", sub: "Zero-Knowledge Proofs" },
-  { name: "Chainlink CCIP", sub: "Cross-Chain Interop" },
+  { name: "Hyperledger Indy", sub: "Decentralized Identity", mark: "◇" },
+  { name: "Hyperledger Aries", sub: "Credential Exchange", mark: "◈" },
+  { name: "AnonCreds", sub: "Zero-Knowledge Proofs", mark: "∎" },
+  { name: "Chainlink CCIP", sub: "Cross-Chain Interop", mark: "⬡" },
 ];
 
 function Landing() {
