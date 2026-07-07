@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoanCenterRouteImport } from './routes/loan-center'
 import { Route as KycVaultRouteImport } from './routes/kyc-vault'
@@ -18,6 +19,11 @@ import { Route as ApprovalsRouteImport } from './routes/approvals'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const WalletRoute = WalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/kyc-vault': typeof KycVaultRoute
   '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
+  '/wallet': typeof WalletRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/kyc-vault': typeof KycVaultRoute
   '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
+  '/wallet': typeof WalletRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/kyc-vault': typeof KycVaultRoute
   '/loan-center': typeof LoanCenterRoute
   '/onboarding': typeof OnboardingRoute
+  '/wallet': typeof WalletRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/kyc-vault'
     | '/loan-center'
     | '/onboarding'
+    | '/wallet'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/kyc-vault'
     | '/loan-center'
     | '/onboarding'
+    | '/wallet'
     | '/api/chat'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/kyc-vault'
     | '/loan-center'
     | '/onboarding'
+    | '/wallet'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
@@ -131,11 +143,19 @@ export interface RootRouteChildren {
   KycVaultRoute: typeof KycVaultRoute
   LoanCenterRoute: typeof LoanCenterRoute
   OnboardingRoute: typeof OnboardingRoute
+  WalletRoute: typeof WalletRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wallet': {
+      id: '/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof WalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   KycVaultRoute: KycVaultRoute,
   LoanCenterRoute: LoanCenterRoute,
   OnboardingRoute: OnboardingRoute,
+  WalletRoute: WalletRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
