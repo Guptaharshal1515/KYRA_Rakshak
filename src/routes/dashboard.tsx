@@ -160,15 +160,6 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* Recent activity */}
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-elegant">
-            <div className="flex items-center justify-between">
-              <div className="text-sm font-semibold">Recent Activity</div>
-              <Link to="/audit" className="text-xs font-medium text-trust hover:underline">
-                View all
-              </Link>
-            </div>
-            <div className="mt-4 space-y-3">
           {/* Recent activity — LIVE via Lovable Cloud realtime */}
           <div className="rounded-2xl border border-border bg-card p-6 shadow-elegant">
             <div className="flex items-center justify-between">
