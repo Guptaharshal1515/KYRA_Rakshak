@@ -34,6 +34,7 @@ function randHash() {
 export function useActivityFeed(limit = 8) {
   const [events, setEvents] = useState<ActivityEvent[]>([]);
   const [loading, setLoading] = useState(true);
+  const emitFn = useServerFn(emitActivityEvent);
 
   useEffect(() => {
     let mounted = true;
