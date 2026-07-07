@@ -1,13 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
-import { ProvenanceBadge, VerifiedBadge, Hash } from "@/components/trust-badges";
+import { ProvenanceBadge, Hash } from "@/components/trust-badges";
 import {
   user,
   stats,
   loans,
-  transactions,
   short,
 } from "@/lib/mock-data";
+import { useActivityFeed } from "@/hooks/use-activity-feed";
+import { useEffect } from "react";
+import { Radio, Zap } from "lucide-react";
 import {
   ArrowUpRight,
   Copy,
