@@ -46,8 +46,8 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const key = process.env.YOUR_API_KEY;
-        if (!key) return new Response("Missing YOUR_API_KEY", { status: 500 });
+        const key = process.env.LOVABLE_API_KEY;
+        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
 
         let body: { messages?: Array<{ role: string; content: string }> };
         try {
@@ -58,21 +58,16 @@ export const Route = createFileRoute("/api/chat")({
         const messages = Array.isArray(body.messages) ? body.messages : [];
         if (messages.length === 0) return new Response("messages required", { status: 400 });
 
-        // Google Gemini REST API — streaming via SSE
-        const model = "gemini-2.5-flash";
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(key)}`;
-
-        const contents = messages.map((m) => ({
-          role: m.role === "assistant" ? "model" : "user",
-          parts: [{ text: m.content }],
-        }));
-
-        const upstream = await fetch(url, {
+        const upstream = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
           method: "POST",
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json",
+            "Lovable-API-Key": key,
+          },
           body: JSON.stringify({
-            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-            contents,
+            model: "openai/gpt-5.5",
+            stream: true,
+            messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
           }),
         });
 
@@ -99,19 +94,15 @@ export const Route = createFileRoute("/api/chat")({
                   const l = line.trim();
                   if (!l.startsWith("data:")) continue;
                   const data = l.slice(5).trim();
-                  if (!data) continue;
+                  if (!data || data === "[DONE]") continue;
                   try {
                     const j = JSON.parse(data);
-                    const parts = j?.candidates?.[0]?.content?.parts;
-                    if (Array.isArray(parts)) {
-                      for (const p of parts) {
-                        if (typeof p?.text === "string" && p.text.length > 0) {
-                          controller.enqueue(encoder.encode(p.text));
-                        }
-                      }
+                    const delta = j?.choices?.[0]?.delta?.content;
+                    if (typeof delta === "string" && delta.length > 0) {
+                      controller.enqueue(encoder.encode(delta));
                     }
                   } catch {
-                    /* ignore malformed line */
+                    /* ignore */
                   }
                 }
               }
