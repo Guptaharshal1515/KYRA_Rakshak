@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { emitActivityEvent } from "@/lib/activity.functions";
 
 export type ActivityEvent = {
   id: string;
