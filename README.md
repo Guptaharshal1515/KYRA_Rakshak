@@ -1,4 +1,11 @@
-<img width="64" height="64" alt="image" src="https://github.com/user-attachments/assets/5c17d2d7-9b5a-4fdd-ac4d-0bd8357cf1e6" />
+<p align="center">
+  <img 
+    src="https://github.com/user-attachments/assets/68e586a5-2961-4dd2-b5c2-f8cc1fb4c169"
+    alt="KYRA Logo"
+    width="250"
+  />
+</p>
+
 
 
 
