@@ -70,11 +70,13 @@ export function useActivityFeed(limit = 8) {
 
   const emitMock = useCallback(async () => {
     const pick = MOCK_EVENTS[Math.floor(Math.random() * MOCK_EVENTS.length)];
-    await supabase.from("activity_events").insert({
-      ...pick,
-      tx_hash: pick.tx_hash ? randHash() : null,
+    await emitFn({
+      data: {
+        ...pick,
+        tx_hash: pick.tx_hash ? randHash() : null,
+      },
     });
-  }, []);
+  }, [emitFn]);
 
   return { events, loading, emitMock };
 }
