@@ -209,19 +209,22 @@ function Landing() {
 
       {/* Tech */}
       <section id="tech" className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="rounded-2xl border border-border bg-card p-8 shadow-elegant">
-          <div className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+        <div className="rounded-2xl border border-border bg-card p-10 shadow-elegant">
+          <div className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             Built on Trusted Enterprise Technologies
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-4">
+          <div className="mt-8 grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4">
             {techBadges.map((t) => (
-              <div key={t.name} className="flex items-center gap-3 rounded-xl border border-border p-4">
-                <div className="grid h-10 w-10 place-items-center rounded-lg bg-trust-soft">
-                  <Network className="h-5 w-5 text-trust" />
+              <div
+                key={t.name}
+                className="flex flex-col items-center justify-center gap-2 bg-card px-6 py-8 text-center transition-colors hover:bg-muted/40"
+              >
+                <div className="font-mono text-2xl leading-none text-trust">{t.mark}</div>
+                <div className="mt-2 text-base font-semibold tracking-tight text-foreground">
+                  {t.name}
                 </div>
-                <div>
-                  <div className="text-xs uppercase tracking-wide text-muted-foreground">{t.sub}</div>
-                  <div className="text-sm font-semibold">{t.name}</div>
+                <div className="text-[11px] uppercase tracking-widest text-muted-foreground">
+                  {t.sub}
                 </div>
               </div>
             ))}
