@@ -169,10 +169,42 @@ function Dashboard() {
               </Link>
             </div>
             <div className="mt-4 space-y-3">
-              {transactions.slice(0, 4).map((t) => (
-                <div key={t.id} className="flex items-center gap-3 rounded-lg border border-border/60 p-3">
+          {/* Recent activity — LIVE via Lovable Cloud realtime */}
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-elegant">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                Recent Activity
+                <span className="inline-flex items-center gap-1 rounded-full bg-trust-soft px-2 py-0.5 text-[10px] font-medium text-trust">
+                  <Radio className="h-3 w-3 animate-pulse" />
+                  Live
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => emitMock()}
+                  className="inline-flex items-center gap-1 text-xs font-medium text-trust hover:underline"
+                >
+                  <Zap className="h-3 w-3" />
+                  Emit event
+                </button>
+                <Link to="/audit" className="text-xs font-medium text-trust hover:underline">
+                  View all
+                </Link>
+              </div>
+            </div>
+            <div className="mt-4 space-y-3">
+              {events.length === 0 && (
+                <div className="rounded-lg border border-dashed border-border/60 p-6 text-center text-xs text-muted-foreground">
+                  Waiting for on-chain events…
+                </div>
+              )}
+              {events.map((t) => (
+                <div
+                  key={t.id}
+                  className="flex items-center gap-3 rounded-lg border border-border/60 p-3 transition-colors animate-in fade-in slide-in-from-top-1"
+                >
                   <div className="grid h-9 w-9 place-items-center rounded-lg bg-muted">
-                    <Activity className="h-4 w-4 text-primary" />
+                    <Radio className="h-4 w-4 text-primary" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
@@ -180,9 +212,9 @@ function Dashboard() {
                       <div className="text-sm font-semibold">{t.amount}</div>
                     </div>
                     <div className="mt-0.5 flex items-center gap-2 text-[11px] text-muted-foreground">
-                      <span>{t.ts}</span>
+                      <span>{new Date(t.created_at).toLocaleTimeString()}</span>
                       <ProvenanceBadge value={t.provenance} />
-                      {t.tx !== "—" && <Hash value={short(t.tx, 6, 4)} />}
+                      {t.tx_hash && <Hash value={short(t.tx_hash, 6, 4)} />}
                     </div>
                   </div>
                 </div>
