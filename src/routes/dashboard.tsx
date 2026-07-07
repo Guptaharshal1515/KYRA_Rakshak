@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
-import { ProvenanceBadge, Hash } from "@/components/trust-badges";
+import { ProvenanceBadge, VerifiedBadge, Hash } from "@/components/trust-badges";
 import {
   user,
   stats,
