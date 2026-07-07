@@ -135,6 +135,7 @@ function RootComponent() {
       <Outlet />
       <Toaster position="top-right" richColors />
       <ChatBot />
+      <Analytics />
     </QueryClientProvider>
   );
 }
