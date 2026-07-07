@@ -9,23 +9,23 @@
 
 
 
-# KYRA — Decentralized Banking Trust Infrastructure (Backend PoC)
+# KYRA - Decentralized Banking Trust Infrastructure (Backend PoC)
 
-**Keep Your Records Always — One Identity, Infinite Trust**
+**Keep Your Records Always - One Identity, Infinite Trust**
 
-KYRA is a blockchain-powered trust infrastructure for decentralized banking. This repository contains the backend proof-of-concept (PoC) — a standalone technical demo verifying the core trust layer: **Decentralized Identity (DID)** + **Verifiable Credentials** + **Privacy-Preserving Proofs (AnonCreds)** + **Cross-Chain / Off-Chain Synchronization (Mock Chainlink CCIP)**.
+KYRA is a blockchain-powered trust infrastructure for decentralized banking. This repository contains the backend proof-of-concept (PoC) - a standalone technical demo verifying the core trust layer: **Decentralized Identity (DID)** + **Verifiable Credentials** + **Privacy-Preserving Proofs (AnonCreds)** + **Cross-Chain / Off-Chain Synchronization (Mock Chainlink CCIP)**.
 
-> This is a prototype. It runs entirely in Docker containers and Python on a single Ubuntu VM, and is not connected to the KYRA frontend. It is not production-hardened — see [Notes](#notes) below.
+> This is a prototype. It runs entirely in Docker containers and Python on a single Ubuntu VM, and is not connected to the KYRA frontend. It is not production-hardened  see [Notes](#notes) below.
 
 ---
 
 ## Story Demonstrated
 
-1. **Identity Setup** — The customer and bank register their decentralized identities (DIDs) on a local Hyperledger Indy ledger.
-2. **DIDComm Connection** — The Customer (Holder) and Bank (Issuer/Verifier) establish a secure DIDComm connection.
-3. **KYC Issuance** — The Bank issues a "KYC Verified" credential to the Customer's wallet once.
-4. **Zero-Knowledge Proof (Selective Disclosure)** — The Customer presents a selective-disclosure proof (proving `kyc_status = verified` and `age >= 18` without disclosing `name` or `document_number`) back to the Bank.
-5. **Off-Chain Synchronization (Mock CCIP)** — A mock CCIP adapter captures the verification event, generates a transaction hash, and syncs the verification status to the bank's Core Banking System (CBS) database and audit trail.
+1. **Identity Setup** - The customer and bank register their decentralized identities (DIDs) on a local Hyperledger Indy ledger.
+2. **DIDComm Connection** - The Customer (Holder) and Bank (Issuer/Verifier) establish a secure DIDComm connection.
+3. **KYC Issuance** - The Bank issues a "KYC Verified" credential to the Customer's wallet once.
+4. **Zero-Knowledge Proof (Selective Disclosure)** - The Customer presents a selective-disclosure proof (proving `kyc_status = verified` and `age >= 18` without disclosing `name` or `document_number`) back to the Bank.
+5. **Off-Chain Synchronization (Mock CCIP)** - A mock CCIP adapter captures the verification event, generates a transaction hash, and syncs the verification status to the bank's Core Banking System (CBS) database and audit trail.
 
 ---
 
@@ -100,7 +100,7 @@ Open a new terminal tab and return to the project root:
 cd ..
 ```
 
-1. **Host-volume pre-creation** — ensures Docker mounts the database and log file correctly as files, not directories:
+1. **Host-volume pre-creation** - ensures Docker mounts the database and log file correctly as files, not directories:
    ```bash
    rm -rf audit.log cbs.db && touch audit.log cbs.db
    ```
@@ -120,7 +120,7 @@ cd ..
 
 ### Step 3: Run the Demo Flow
 
-#### Option A — Full End-to-End Demo (recommended)
+#### Option A - Full End-to-End Demo (recommended)
 ```bash
 python3 cli/kyra.py full-flow
 ```
@@ -132,7 +132,7 @@ This sequentially:
 5. Requests and verifies the selective-disclosure proof
 6. Triggers the mock CCIP adapter to write the record to `cbs.db` and log the audit trail in `audit.log`
 
-#### Option B — Step-by-Step Execution
+#### Option B - Step-by-Step Execution
 ```bash
 python3 cli/kyra.py setup
 python3 cli/kyra.py issue --name "Alice Smith" --age 25 --status "verified"
@@ -162,7 +162,7 @@ Profiles:
 ### 1. Webhook-Driven Completion
 ACA-Py agents process lifecycle actions asynchronously. A common race condition occurs when credential records are deleted by the agent (`auto_remove: true`) before the coordinator can poll them.
 
-The controller uses a **webhook-driven state model** (`controller/app.py`) — webhook callbacks signal state transitions (e.g. `issuer` role reaching state `done`) directly to the controller's in-memory cache, allowing safe, immediate verification without failing due to agent record cleanup.
+The controller uses a **webhook-driven state model** (`controller/app.py`) - webhook callbacks signal state transitions (e.g. `issuer` role reaching state `done`) directly to the controller's in-memory cache, allowing safe, immediate verification without failing due to agent record cleanup.
 
 ### 2. Zero-Knowledge Proofs (AnonCreds)
 When requesting verification, the Bank specifies schema attributes and predicates:
@@ -197,7 +197,7 @@ The controller implements a webhook receiver at `/webhooks/topic/present_proof_v
 ## Notes
 
 - This is a **prototype**, not production-ready. Live CCIP integration (testnet/mainnet), key management, and security hardening are out of scope for this demo.
-- The off-chain sync is mocked — it represents where a real Core Banking System (CBS) integration would occur.
+- The off-chain sync is mocked - it represents where a real Core Banking System (CBS) integration would occur.
 - The frontend (Lovable-built UI) lives in a this repository and whereas backend is not wired to this repository.
 
 ---
